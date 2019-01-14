@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import './App.css'
 import axios from 'axios'
 import SignUpLogIn from './components/SignUpLogIn';
+import RecipesList from './components/RecipesList';
 
 class App extends Component {
   state = {
