@@ -18,6 +18,7 @@ gem 'puma', '~> 3.11'
 gem 'devise'
 gem 'omniauth'
 gem 'devise_token_auth'
+gem 'rb-readline', '~> 0.5.3'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
