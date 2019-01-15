@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import './App.css'
 import axios from 'axios'
+import { saveAuthTokens } from './util/SessionHeaderUtil'
 import SignUpLogIn from './components/SignUpLogIn';
 import RecipesList from './components/RecipesList';
 
@@ -12,6 +13,7 @@ class App extends Component {
   }
 
   async componentWillMount() {
+
     let recipes = []
     if (this.state.signedIn) {
       recipes = await this.getRecipes()
@@ -27,30 +29,40 @@ class App extends Component {
   }
 
   signUp = async (email, password, password_confirmation) => {
+    try {
+      const payload = {
+        email: email,
+        password: password,
+        password_confirmation: password_confirmation
+      }
+      const response = await axios.post('/auth', payload)
+      saveAuthTokens(response.headers)
+      this.setState({ signedIn: true })
 
-    const payload = {
-      email: email,
-      password: password,
-      password_confirmation: password_confirmation
+    } catch (error) {
+      console.log(error)
     }
-    await axios.post('/auth, payload')
-    this.setState({ signedIn: true })
-
   }
 
   signIn = async (email, password) => {
+    try {
+      const payload = {
+        email,
+        password
+      }
+      const response = await axios.post('/auth/sign_in', payload)
+      saveAuthTokens(response.headers)
 
-    const payload = {
-      email,
-      password
+      const recipes = await this.getRecipes()
+
+      this.setState({
+        signedIn: true,
+        recipes
+      })
+
+    } catch (error) {
+      console.log(error)
     }
-    await axios.post('auth/sign_in', payload)
-    const recipes = await this.getRecipes()
-    this.setState({
-      signedIn: true,
-      recipes
-    })
-
   }
 
   render() {
@@ -71,7 +83,7 @@ class App extends Component {
         <div>
           <Switch>
             <Route exact path='/signUp' render={SignUpLogInComponent} />
-            <Route exact path= '/recipes' render={RecipesComponent} />
+            <Route exact path='/recipes' render={RecipesComponent} />
           </Switch>
 
           {this.state.signedIn ? <Redirect to='/recipes/' /> : <Redirect to='/signUp' />}
