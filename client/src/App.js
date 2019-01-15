@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import './App.css'
 import axios from 'axios'
-import { saveAuthTokens } from './util/SessionHeaderUtil'
+import { saveAuthTokens, setAxiosDefaults, userIsLoggedIn } from './util/SessionHeaderUtil'
 import SignUpLogIn from './components/SignUpLogIn';
 import RecipesList from './components/RecipesList';
 
@@ -12,14 +12,19 @@ class App extends Component {
     recipes: []
   }
 
-  async componentWillMount() {
-
+  async componentDidMount() {
+    const signedIn = userIsLoggedIn()
+    
     let recipes = []
     if (this.state.signedIn) {
+      setAxiosDefaults()
       recipes = await this.getRecipes()
     }
 
-    this.setState({ recipes })
+    this.setState({
+      recipes,
+      signedIn
+    })
   }
 
   getRecipes = async () => {
@@ -29,40 +34,33 @@ class App extends Component {
   }
 
   signUp = async (email, password, password_confirmation) => {
-    try {
-      const payload = {
-        email: email,
-        password: password,
-        password_confirmation: password_confirmation
-      }
-      const response = await axios.post('/auth', payload)
-      saveAuthTokens(response.headers)
-      this.setState({ signedIn: true })
 
-    } catch (error) {
-      console.log(error)
+    const payload = {
+      email: email,
+      password: password,
+      password_confirmation: password_confirmation
     }
+    const response = await axios.post('/auth', payload)
+    saveAuthTokens(response.headers)
+    this.setState({ signedIn: true })
+
   }
 
   signIn = async (email, password) => {
-    try {
-      const payload = {
-        email,
-        password
-      }
-      const response = await axios.post('/auth/sign_in', payload)
-      saveAuthTokens(response.headers)
 
-      const recipes = await this.getRecipes()
-
-      this.setState({
-        signedIn: true,
-        recipes
-      })
-
-    } catch (error) {
-      console.log(error)
+    const payload = {
+      email,
+      password
     }
+    const response = await axios.post('/auth/sign_in', payload)
+    saveAuthTokens(response.headers)
+
+    const recipes = await this.getRecipes()
+
+    this.setState({
+      signedIn: true,
+      recipes
+    })
   }
 
   render() {

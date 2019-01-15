@@ -13,3 +13,23 @@ export function saveAuthTokens (headers) {
     localStorage.setItem('uid', headers.uid)
     localStorage.setItem('expiry', headers.expiry)
   }
+
+  export function userIsLoggedIn() {
+    // check to see if our local storage contains any session data
+    const userLoggedIn = (
+        !!localStorage.getItem('access-token') &&
+        !!localStorage.getItem('client') &&
+        !!localStorage.getItem('uid') &&
+        !!localStorage.getItem('expiry')
+    )
+
+    return userLoggedIn
+}
+
+export function setAxiosDefaults(){
+  // tell axios to use the existing session data from the last User
+  axios.defaults.headers['access-token'] = localStorage.getItem("access-token"); 
+  axios.defaults.headers.client = localStorage.getItem("client"); 
+  axios.defaults.headers.uid = localStorage.getItem("uid"); 
+  axios.defaults.headers.expiry = localStorage.getItem("expiry"); 
+}

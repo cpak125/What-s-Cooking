@@ -1,16 +1,31 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-const Recipe = (props) => {
-    return (
-        <div>
-            <div>{props.img}</div>
-            <div><h2>{props.name}</h2></div>
-            <div>{props.ingredients}</div>
-            <div>{props.cal_per_serving}</div>
-            <div>{props.servings}</div>
-            <div>{props.instructions}</div>
-        </div>
-    )
+export default class Recipe extends Component {
+    render() {
+        return (
+            <div>
+                <div>{this.props.img}</div>
+                <div><h2>{this.props.name}</h2></div>
+                <div>{this.props.ingredients}</div>
+                <div>{this.props.cal_per_serving}</div>
+                <div>{this.props.servings}</div>
+                <div>{this.props.instructions}</div>
+            </div>
+        )
+    }
 }
 
-export default Recipe
+// const Recipe = (this.props) => {
+//     return (
+//         <div>
+//             <div>{this.props.img}</div>
+//             <div><h2>{this.props.name}</h2></div>
+//             <div>{this.props.ingredients}</div>
+//             <div>{this.props.cal_per_serving}</div>
+//             <div>{this.props.servings}</div>
+//             <div>{this.props.instructions}</div>
+//         </div>
+//     )
+// }
+
+// export default Recipe
