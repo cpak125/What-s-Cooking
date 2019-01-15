@@ -5,7 +5,7 @@ export default class RecipesList extends Component {
     render() {
         const recipes = this.props.recipes.map((recipe) => {
             return (
-                <Recipe {...recipe} deletePost={this.props.deletePost} key={recipe.id} />
+                <Recipe {...recipe} deleteRecipe={this.props.deleteRecipe} key={recipe.id} />
             )
         })
         return (

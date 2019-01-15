@@ -12,7 +12,7 @@ class App extends Component {
     recipes: []
   }
 
-  async componentDidMount() {
+  async componentWillMount() {
     const signedIn = userIsLoggedIn()
 
     let recipes = []
@@ -77,6 +77,16 @@ class App extends Component {
     }
   }
 
+  deleteRecipe = async (recipeId) => {
+    try {
+      await axios.delete(`/recipes/${recipeId}`)
+      const recipes = await this.getRecipes()
+      this.setState({ recipes })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   render() {
 
     const SignUpLogInComponent = () => (
@@ -87,7 +97,8 @@ class App extends Component {
 
     const RecipesComponent = () => (
       <RecipesList
-        recipes={this.state.recipes} />
+        recipes={this.state.recipes}
+        deleteRecipe={this.deleteRecipe} />
     )
 
     return (

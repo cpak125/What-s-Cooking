@@ -19,6 +19,7 @@ gem 'devise'
 gem 'omniauth'
 gem 'devise_token_auth'
 gem 'rb-readline', '~> 0.5.3'
+gem 'cancancan'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
