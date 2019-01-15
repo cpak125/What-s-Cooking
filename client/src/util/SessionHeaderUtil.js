@@ -33,3 +33,11 @@ export function setAxiosDefaults(){
   axios.defaults.headers.uid = localStorage.getItem("uid"); 
   axios.defaults.headers.expiry = localStorage.getItem("expiry"); 
 }
+
+export function clearAuthTokens() {
+  // clearing out our session data 
+  localStorage.removeItem('access-token')
+  localStorage.removeItem('client')
+  localStorage.removeItem('uid')
+  localStorage.removeItem('expiry')
+}

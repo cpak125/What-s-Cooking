@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import './App.css'
 import axios from 'axios'
-import { saveAuthTokens, setAxiosDefaults, userIsLoggedIn } from './util/SessionHeaderUtil'
+import { saveAuthTokens, setAxiosDefaults, userIsLoggedIn, clearAuthTokens } from './util/SessionHeaderUtil'
 import SignUpLogIn from './components/SignUpLogIn';
 import RecipesList from './components/RecipesList';
 
@@ -14,7 +14,7 @@ class App extends Component {
 
   async componentDidMount() {
     const signedIn = userIsLoggedIn()
-    
+
     let recipes = []
     if (this.state.signedIn) {
       setAxiosDefaults()
@@ -63,6 +63,20 @@ class App extends Component {
     })
   }
 
+  signOut = async (event) => {
+
+    try {
+      event.preventDefault()
+      await axios.delete('/auth/sign_out')
+
+      clearAuthTokens();
+
+      this.setState({ signedIn: false })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   render() {
 
     const SignUpLogInComponent = () => (
@@ -85,6 +99,7 @@ class App extends Component {
           </Switch>
 
           {this.state.signedIn ? <Redirect to='/recipes/' /> : <Redirect to='/signUp' />}
+          <button onClick={this.signOut}>Sign Out</button>
         </div>
       </Router>
     )
