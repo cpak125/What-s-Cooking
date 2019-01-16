@@ -36,24 +36,7 @@ class App extends Component {
 
   }
 
-  // signUp = async (email, password, password_confirmation) => {
-  //   try {
-  //     const payload = {
-  //       email: email,
-  //       password: password,
-  //       password_confirmation: password_confirmation
-  //     }
-  //     const response = await axios.post('/auth', payload)
-  //     saveAuthTokens(response.headers)
-  //     this.setState({ signedIn: true })
-  //   } catch (error) {
-  //     let errorMessage = ''
-  //     if (error.response.status === 422) {
-  //       errorMessage = 'Invaild email and/or passwords do not match'
-  //     }
-  //     this.setState({ error: errorMessage })
-  //   }
-  // }
+
 
   // signIn = async (email, password) => {
   //   try {
