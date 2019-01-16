@@ -58,7 +58,7 @@ export default class GlobalNav extends Component {
                     <div>
                         <GlobalNavLogo
                             src="https://cdn4.vectorstock.com/i/1000x1000/76/33/the-crossed-knives-icon-knife-and-chef-kitchen-vector-6607633.jpg"
-                            alt="Secret Logo" />
+                            alt="Knife Logo" />
                         <GlobalNavHeader>What's Cooking</GlobalNavHeader>
                     </div>
                 </GlobalNavLogoWrapper>

@@ -19,7 +19,7 @@ class App extends Component {
     const signedIn = userIsLoggedIn()
 
     let recipes = []
-    if (this.state.signedIn) {
+    if (signedIn) {
       setAxiosDefaults()
       recipes = await this.getRecipes()
     }
@@ -36,84 +36,93 @@ class App extends Component {
 
   }
 
-  signUp = async (email, password, password_confirmation) => {
-    try {
-      const payload = {
-        email: email,
-        password: password,
-        password_confirmation: password_confirmation
-      }
-      const response = await axios.post('/auth', payload)
-      saveAuthTokens(response.headers)
-      this.setState({ signedIn: true })
-    } catch (error) {
-      let errorMessage = ''
-      if (error.response.status === 422) {
-        errorMessage = 'Invaild email and/or passwords do not match'
-      }
-      this.setState({ error: errorMessage })
-    }
-  }
+  // signUp = async (email, password, password_confirmation) => {
+  //   try {
+  //     const payload = {
+  //       email: email,
+  //       password: password,
+  //       password_confirmation: password_confirmation
+  //     }
+  //     const response = await axios.post('/auth', payload)
+  //     saveAuthTokens(response.headers)
+  //     this.setState({ signedIn: true })
+  //   } catch (error) {
+  //     let errorMessage = ''
+  //     if (error.response.status === 422) {
+  //       errorMessage = 'Invaild email and/or passwords do not match'
+  //     }
+  //     this.setState({ error: errorMessage })
+  //   }
+  // }
 
-  signIn = async (email, password) => {
-    try {
-      const payload = {
-        email,
-        password
-      }
-      const response = await axios.post('/auth/sign_in', payload)
-      saveAuthTokens(response.headers)
+  // signIn = async (email, password) => {
+  //   try {
+  //     const payload = {
+  //       email,
+  //       password
+  //     }
+  //     const response = await axios.post('/auth/sign_in', payload)
+  //     saveAuthTokens(response.headers)
 
-      const recipes = await this.getRecipes()
+  //     const recipes = await this.getRecipes()
 
-      this.setState({
-        signedIn: true,
-        recipes
-      })
+  //     this.setState({
+  //       signedIn: true,
+  //       recipes
+  //     })
 
-    } catch (error) {
-      let errorMessage = ''
-      if (error.response.status === 401) {
-        errorMessage = "Invalid email and/or password"
-      }
-      this.setState({ error: errorMessage })
-    }
-  }
+  //   } catch (error) {
+  //     let errorMessage = ''
+  //     if (error.response.status === 401) {
+  //       errorMessage = "Invalid email and/or password"
+  //     }
+  //     this.setState({ error: errorMessage })
+  //   }
+  // }
 
   dismissError = () => {
     this.setState({ error: '' })
   }
 
-  signOut = async (event) => {
+  // signOut = async (event) => {
 
-    try {
-      event.preventDefault()
-      await axios.delete('/auth/sign_out')
+  //   try {
+  //     event.preventDefault()
+  //     await axios.delete('/auth/sign_out')
 
-      clearAuthTokens();
+  //     clearAuthTokens();
 
-      this.setState({ signedIn: false })
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  //     this.setState({ signedIn: false })
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
 
   deleteRecipe = async (recipeId) => {
-    try {
-      await axios.delete(`/recipes/${recipeId}`)
-      const recipes = await this.getRecipes()
-      this.setState({ recipes })
-    } catch (error) {
-      console.log(error)
-    }
+    await axios.delete(`/recipes/${recipeId}`)
+    const recipes = await this.getRecipes()
+    this.setState({ recipes })
+  }
+
+  setUserSignedIn = async () => {
+    const recipes = await this.getRecipes()
+    this.setState({
+      signedIn: true,
+      recipes
+    })
+  }
+
+  signOut = () => {
+    this.setState({
+      signedIn: false,
+      recipes: []
+    })
   }
 
   render() {
 
     const SignUpLogInComponent = () => (
-      <SignUpLogIn
-        signUp={this.signUp}
-        signIn={this.signIn} />
+      <SignUpLogIn setUserSignedIn={this.setUserSignedIn} />
     )
 
     const RecipesComponent = () => (

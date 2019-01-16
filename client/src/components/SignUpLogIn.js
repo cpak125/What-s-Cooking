@@ -2,37 +2,54 @@ import React, { Component } from 'react'
 
 export default class SignUpLogIn extends Component {
     state = {
-        email: '',
-        password: '',
-        password_confirmation: ''
+        showLogin: true
     }
 
-    signUp = (event) => {
-        event.preventDefault()
-        this.props.signUp(
-            this.state.email,
-            this.state.password,
-            this.state.password_confirmation
-        )
+    toggleLogin = () => {
+        this.setState({ showLogin: !this.state.showLogin })
     }
+    // signUp = (event) => {
+    //     event.preventDefault()
+    //     this.props.signUp(
+    //         this.state.email,
+    //         this.state.password,
+    //         this.state.password_confirmation
+    //     )
+    // }
 
-    signIn = (event) => {
-        event.preventDefault()
-        this.props.signIn(
-            this.state.email,
-            this.state.password
-        )
-    }
+    // signIn = (event) => {
+    //     event.preventDefault()
+    //     this.props.signIn(
+    //         this.state.email,
+    //         this.state.password
+    //     )
+    // }
 
-    handleChange = (event) => {
-        const newState = { ...this.state }
-        newState[event.target.name] = event.target.value
-        this.setState(newState)
-    }
+    // handleChange = (event) => {
+    //     const newState = { ...this.state }
+    //     newState[event.target.name] = event.target.value
+    //     this.setState(newState)
+    // }
     render() {
+        const placeholder = (<SignUpLogInPlaceholder showLogin={this.state.showLogin} toggleLogin={this.toggleLogin} />)
+
+        const login = (
+            <SignUpLogInWrapper>
+                <Login setUserSignedIn={this.props.setUserSignedIn} />
+                {placeholder}
+            </SignUpLogInWrapper>
+        )
+
+        const signUp = (
+            <SignUpLogInWrapper>
+                {placeholder}
+                <SignUp setUserSignedIn={this.props.setUserSignedIn} />
+            </SignUpLogInWrapper>
+        )
         return (
             <div>
-                <form>
+                {this.state.showLogin ? login : signUp}
+                {/* <form>
                     <div>
                         <label htmlFor="email">E-mail: </label>
                         <input onChange={this.handleChange} type="text" name="email" value={this.state.email} />
@@ -49,7 +66,7 @@ export default class SignUpLogIn extends Component {
 
                     <button onClick={this.signUp}>Sign Up</button>
                     <button onClick={this.signIn}>Log In</button>
-                </form>
+                </form> */}
             </div>
         )
     }
