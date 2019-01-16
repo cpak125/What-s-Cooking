@@ -20,23 +20,6 @@ export default class SignUpLogIn extends Component {
     toggleLogin = () => {
         this.setState({ showLogin: !this.state.showLogin })
     }
-    // signUp = (event) => {
-    //     event.preventDefault()
-    //     this.props.signUp(
-    //         this.state.email,
-    //         this.state.password,
-    //         this.state.password_confirmation
-    //     )
-    // }
-
-    // signIn = (event) => {
-    //     event.preventDefault()
-    //     this.props.signIn(
-    //         this.state.email,
-    //         this.state.password
-    //     )
-    // }
-
 
     render() {
         const placeholder = (<SignUpLogInPlaceholder showLogin={this.state.showLogin} toggleLogin={this.toggleLogin} />)

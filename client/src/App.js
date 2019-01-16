@@ -38,30 +38,6 @@ class App extends Component {
 
 
 
-  // signIn = async (email, password) => {
-  //   try {
-  //     const payload = {
-  //       email,
-  //       password
-  //     }
-  //     const response = await axios.post('/auth/sign_in', payload)
-  //     saveAuthTokens(response.headers)
-
-  //     const recipes = await this.getRecipes()
-
-  //     this.setState({
-  //       signedIn: true,
-  //       recipes
-  //     })
-
-  //   } catch (error) {
-  //     let errorMessage = ''
-  //     if (error.response.status === 401) {
-  //       errorMessage = "Invalid email and/or password"
-  //     }
-  //     this.setState({ error: errorMessage })
-  //   }
-  // }
 
   dismissError = () => {
     this.setState({ error: '' })
