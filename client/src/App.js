@@ -6,6 +6,7 @@ import { saveAuthTokens, setAxiosDefaults, userIsLoggedIn, clearAuthTokens } fro
 import SignUpLogIn from './components/SignUpLogIn';
 import RecipesList from './components/RecipesList';
 import FlashError from './components/FlashError';
+import GlobalNav from './components/GlobalNav';
 
 class App extends Component {
   state = {
@@ -123,14 +124,15 @@ class App extends Component {
 
     return (
       <Router >
-        <div>
+        <div className='App'>
+          <GlobalNav signedIn={this.state.signedIn} signOut={this.signOut} />
+
           {this.state.error ? <FlashError error={this.state.error} dismissError={this.dismissError} /> : null}
 
           <Switch>
             <Route exact path='/signUp' render={SignUpLogInComponent} />
             <Route exact path='/recipes' render={RecipesComponent} />
           </Switch>
-          <button onClick={this.signOut}>Sign Out</button>
 
           {this.state.signedIn ? <Redirect to='/recipes/' /> : <Redirect to='/signUp' />}
         </div>
