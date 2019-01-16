@@ -5,11 +5,13 @@ import axios from 'axios'
 import { saveAuthTokens, setAxiosDefaults, userIsLoggedIn, clearAuthTokens } from './util/SessionHeaderUtil'
 import SignUpLogIn from './components/SignUpLogIn';
 import RecipesList from './components/RecipesList';
+import FlashError from './components/FlashError';
 
 class App extends Component {
   state = {
     signedIn: false,
-    recipes: []
+    recipes: [],
+    error: ''
   }
 
   async componentWillMount() {
@@ -34,33 +36,51 @@ class App extends Component {
   }
 
   signUp = async (email, password, password_confirmation) => {
-
-    const payload = {
-      email: email,
-      password: password,
-      password_confirmation: password_confirmation
+    try {
+      const payload = {
+        email: email,
+        password: password,
+        password_confirmation: password_confirmation
+      }
+      const response = await axios.post('/auth', payload)
+      saveAuthTokens(response.headers)
+      this.setState({ signedIn: true })
+    } catch (error) {
+      let errorMessage = ''
+      if (error.response.status === 422) {
+        errorMessage = 'Invaild email and/or passwords do not match'
+      }
+      this.setState({ error: errorMessage })
     }
-    const response = await axios.post('/auth', payload)
-    saveAuthTokens(response.headers)
-    this.setState({ signedIn: true })
-
   }
 
   signIn = async (email, password) => {
+    try {
+      const payload = {
+        email,
+        password
+      }
+      const response = await axios.post('/auth/sign_in', payload)
+      saveAuthTokens(response.headers)
 
-    const payload = {
-      email,
-      password
+      const recipes = await this.getRecipes()
+
+      this.setState({
+        signedIn: true,
+        recipes
+      })
+
+    } catch (error) {
+      let errorMessage = ''
+      if (error.response.status === 401) {
+        errorMessage = "Invalid email and/or password"
+      }
+      this.setState({ error: errorMessage })
     }
-    const response = await axios.post('/auth/sign_in', payload)
-    saveAuthTokens(response.headers)
+  }
 
-    const recipes = await this.getRecipes()
-
-    this.setState({
-      signedIn: true,
-      recipes
-    })
+  dismissError = () => {
+    this.setState({ error: '' })
   }
 
   signOut = async (event) => {
@@ -104,13 +124,15 @@ class App extends Component {
     return (
       <Router >
         <div>
+          {this.state.error ? <FlashError error={this.state.error} dismissError={this.dismissError} /> : null}
+
           <Switch>
             <Route exact path='/signUp' render={SignUpLogInComponent} />
             <Route exact path='/recipes' render={RecipesComponent} />
           </Switch>
+          <button onClick={this.signOut}>Sign Out</button>
 
           {this.state.signedIn ? <Redirect to='/recipes/' /> : <Redirect to='/signUp' />}
-          <button onClick={this.signOut}>Sign Out</button>
         </div>
       </Router>
     )
