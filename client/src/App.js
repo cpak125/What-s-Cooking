@@ -2,17 +2,15 @@ import React, { Component } from 'react'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import './App.css'
 import axios from 'axios'
-import { saveAuthTokens, setAxiosDefaults, userIsLoggedIn, clearAuthTokens } from './util/SessionHeaderUtil'
+import { setAxiosDefaults, userIsLoggedIn } from './util/SessionHeaderUtil'
 import SignUpLogIn from './components/SignUpLogIn';
 import RecipesList from './components/RecipesList';
-import FlashError from './components/FlashError';
 import GlobalNav from './components/GlobalNav';
 
 class App extends Component {
   state = {
     signedIn: false,
-    recipes: [],
-    error: ''
+    recipes: []
   }
 
   async componentWillMount() {
@@ -35,27 +33,6 @@ class App extends Component {
     return response.data
 
   }
-
-
-
-
-  dismissError = () => {
-    this.setState({ error: '' })
-  }
-
-  // signOut = async (event) => {
-
-  //   try {
-  //     event.preventDefault()
-  //     await axios.delete('/auth/sign_out')
-
-  //     clearAuthTokens();
-
-  //     this.setState({ signedIn: false })
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
 
   deleteRecipe = async (recipeId) => {
     await axios.delete(`/recipes/${recipeId}`)
@@ -95,7 +72,6 @@ class App extends Component {
         <div className='App'>
           <GlobalNav signedIn={this.state.signedIn} signOut={this.signOut} />
 
-          {this.state.error ? <FlashError error={this.state.error} dismissError={this.dismissError} /> : null}
 
           <Switch>
             <Route exact path='/signUp' render={SignUpLogInComponent} />

@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
+import styled from 'styled-components'
 import { saveAuthTokens } from '../util/SessionHeaderUtil'
 import axios from 'axios'
-import styled from 'styled-components'
+import FlashError from './FlashError';
 
-const LogInWrapper = styled.div`
+
+const LoginWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -47,7 +49,8 @@ const LoginButton = styled.button`
 export default class Login extends Component {
   state = {
     email: '',
-    password: ''
+    password: '',
+    error: ''
   }
 
   handleChange = (event) => {
@@ -56,21 +59,16 @@ export default class Login extends Component {
     this.setState(newState)
   }
 
-  logIn = async (email, password) => {
+  signIn = async () => {
     try {
       const payload = {
-        email,
-        password
+        email: this.state.email,
+        password: this.state.password
       }
       const response = await axios.post('/auth/sign_in', payload)
       saveAuthTokens(response.headers)
 
-      const recipes = await this.getRecipes()
-
-      this.setState({
-        signedIn: true,
-        recipes
-      })
+      this.props.setUserSignedIn()
 
     } catch (error) {
       let errorMessage = ''
@@ -81,32 +79,42 @@ export default class Login extends Component {
     }
   }
 
+  dismissError = () => {
+    this.setState({error: ''})
+}
+
   render() {
     return (
-      <LogInWrapper>
-        <h1>Log In</h1>
-        <LoginFormWrapper>
-          <form>
-            <LoginInputWrapper>
-              <LoginInput onChange={this.handleChange}
-                type="text"
-                name="email"
-                placeholder="email"
-                value={this.state.email} />
-            </LoginInputWrapper>
-            <LoginInputWrapper>
-              <LoginInput onChange={this.handleChange}
-                type="password"
-                name="password"
-                placeholder="password"
-                value={this.state.password} />
-            </LoginInputWrapper>
-          </form>
-        </LoginFormWrapper>
-        <LoginButtonWrapper>
-          <LoginButton onClick={this.logIn}>Log In</LoginButton>
-        </LoginButtonWrapper>
+      <div>
+        <LoginWrapper>
+          <h1>Log In</h1>
+          <LoginFormWrapper>
+            <form>
+              <LoginInputWrapper>
+                <LoginInput onChange={this.handleChange}
+                  type="text"
+                  name="email"
+                  placeholder="email"
+                  value={this.state.email} />
+              </LoginInputWrapper>
+              <LoginInputWrapper>
+                <LoginInput onChange={this.handleChange}
+                  type="password"
+                  name="password"
+                  placeholder="password"
+                  value={this.state.password} />
+              </LoginInputWrapper>
+            </form>
+          </LoginFormWrapper>
+          <LoginButtonWrapper>
+            <LoginButton onClick={this.signIn}>Log In</LoginButton>
+          </LoginButtonWrapper>
 
-      </LogInWrapper>)
+        </LoginWrapper>
+        
+        {this.state.error ? <FlashError error={this.state.error} dismissError={this.dismissError} /> : null}
+
+      </div>
+    )
   }
 }

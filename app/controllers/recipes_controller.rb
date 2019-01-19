@@ -3,6 +3,7 @@ class RecipesController < ApplicationController
     # load_and_authorize_resource only: [:destroy]
 
     def index
+        @user=current_user
         @recipes = current_user.recipes    
         render json: @recipes
         # @recipes = Recipe.all

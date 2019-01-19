@@ -14,7 +14,7 @@ const SignUpLogInWrapper = styled.div`
 
 export default class SignUpLogIn extends Component {
     state = {
-        showLogin: true
+        showLogin: true,
     }
 
     toggleLogin = () => {
@@ -34,30 +34,13 @@ export default class SignUpLogIn extends Component {
         const signUp = (
             <SignUpLogInWrapper>
                 {placeholder}
-                <SignUp setUserSignedIn={this.props.setUserSignedIn} />
+                <SignUp  setUserSignedIn={this.props.setUserSignedIn} />
             </SignUpLogInWrapper>
         )
         return (
             <div>
-                {this.state.showLogin ? login : signUp}
-                {/* <form>
-                    <div>
-                        <label htmlFor="email">E-mail: </label>
-                        <input onChange={this.handleChange} type="text" name="email" value={this.state.email} />
-                    </div>
-                    <div>
-                        <label htmlFor="password">Password: </label>
-                        <input onChange={this.handleChange} type="password" name="password" value={this.state.password} />
-                    </div>
-                    <div>
-                        <label htmlFor="password_confirmation">Confirm Password: </label>
-                        <input onChange={this.handleChange} type="password" name="password_confirmation"
-                            value={this.state.password_confirmation} />
-                    </div>
 
-                    <button onClick={this.signUp}>Sign Up</button>
-                    <button onClick={this.signIn}>Log In</button>
-                </form> */}
+                {this.state.showLogin ? login : signUp}
             </div>
         )
     }

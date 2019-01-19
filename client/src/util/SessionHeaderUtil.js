@@ -26,6 +26,10 @@ export function saveAuthTokens (headers) {
     return userLoggedIn
 }
 
+export function getEmail(){
+  localStorage.getItem('uid')
+}
+
 export function setAxiosDefaults(){
   // tell axios to use the existing session data from the last User
   axios.defaults.headers['access-token'] = localStorage.getItem("access-token"); 

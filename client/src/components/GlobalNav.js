@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-
-import { Link } from 'react-router-dom'
+import { clearAuthTokens, getEmail } from '../util/SessionHeaderUtil'
 import axios from 'axios'
 import styled from 'styled-components'
 
@@ -38,6 +37,7 @@ const SessionButtonWrapper = styled.div`
 const SessionButton = styled.button`
   border: none;
   padding: 10px 15px;
+  margin-left: 10px;
   border-radius: 5%;
   text-align: center;
   color: white;
@@ -47,10 +47,26 @@ const SessionButton = styled.button`
 `
 
 export default class GlobalNav extends Component {
+
+    signOut = async (event) => {
+
+        try {
+            event.preventDefault()
+            await axios.delete('/auth/sign_out')
+
+            clearAuthTokens();
+
+            this.props.signOut()
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     render() {
         const signOutButton =
-            <SessionButton onClick={this.props.signOut}><a>Sign Out</a></SessionButton>
+            <SessionButton onClick={this.signOut}>Sign Out</SessionButton>
 
+            const email= localStorage.getItem('uid')
         return (
             <GlobalNavWrapper>
 
@@ -64,8 +80,13 @@ export default class GlobalNav extends Component {
                 </GlobalNavLogoWrapper>
 
                 <SessionButtonWrapper>
+                    {email}
                     {this.props.signedIn ? signOutButton : null}
                 </SessionButtonWrapper>
+                {/* <div>
+                    {this.props.signedIn ? email : null}
+                </div> */}
+
 
             </GlobalNavWrapper>
         )
