@@ -6,6 +6,8 @@ import { setAxiosDefaults, userIsLoggedIn } from './util/SessionHeaderUtil'
 import SignUpLogIn from './components/SignUpLogIn';
 import RecipesList from './components/RecipesList';
 import GlobalNav from './components/GlobalNav';
+import Recipe from './components/Recipe';
+
 
 class App extends Component {
   state = {
@@ -76,6 +78,7 @@ class App extends Component {
           <Switch>
             <Route exact path='/signUp' render={SignUpLogInComponent} />
             <Route exact path='/recipes' render={RecipesComponent} />
+            <Route exact path='/recipes/:id' component={Recipe}  />
           </Switch>
 
           {this.state.signedIn ? <Redirect to='/recipes/' /> : <Redirect to='/signUp' />}

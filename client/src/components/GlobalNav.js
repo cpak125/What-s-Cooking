@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
-import { clearAuthTokens, getEmail } from '../util/SessionHeaderUtil'
+import { clearAuthTokens } from '../util/SessionHeaderUtil'
 import axios from 'axios'
 import styled from 'styled-components'
 
 const GlobalNavWrapper = styled.div`
+  width:100%;
+  height:auto; 
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -11,11 +13,11 @@ const GlobalNavWrapper = styled.div`
   box-shadow: 0 4px 10px -2px lightgray;
   margin-bottom: 35px;
   background-color: #175676;
+
 `
 
 const GlobalNavLogoWrapper = styled.div`
   display: flex;
-  align-items: center;
 `
 
 const GlobalNavLogo = styled.img`
@@ -32,6 +34,8 @@ const GlobalNavHeader = styled.span`
 `
 
 const SessionButtonWrapper = styled.div`
+display:flex;
+flex-wrap:wrap;
 `
 
 const SessionButton = styled.button`
@@ -63,10 +67,11 @@ export default class GlobalNav extends Component {
     }
 
     render() {
-        const signOutButton =
-            <SessionButton onClick={this.signOut}>Sign Out</SessionButton>
+        const email = localStorage.getItem('uid')
 
-            const email= localStorage.getItem('uid')
+        const signOutButton =
+            <SessionButton onClick={this.signOut}> Sign Out</SessionButton>
+
         return (
             <GlobalNavWrapper>
 
@@ -83,10 +88,6 @@ export default class GlobalNav extends Component {
                     {email}
                     {this.props.signedIn ? signOutButton : null}
                 </SessionButtonWrapper>
-                {/* <div>
-                    {this.props.signedIn ? email : null}
-                </div> */}
-
 
             </GlobalNavWrapper>
         )
