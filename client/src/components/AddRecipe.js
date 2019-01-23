@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios';
+import RecipeResults from './RecipeResults';
 
 export default class AddRecipe extends Component {
     state = {
@@ -16,7 +17,7 @@ export default class AddRecipe extends Component {
     }
 
     searchButtonHandler = async () => {
-        const response = await axios.get(`https://api.edamam.com/search?q=${this.state.searchQuery}&app_id=${YOUR_APP_ID}&app_key=${YOUR_APP_KEY}`)
+        const response = await axios.get(`https://api.edamam.com/search?q=${this.state.searchQuery}&app_id=${process.env.REACT_APP_API_ID}&app_key=${process.env.REACT_APP_API_KEY}`)
         this.transferResult(response)
     }
 
@@ -26,9 +27,11 @@ export default class AddRecipe extends Component {
                 <h2>Search for a Recipe</h2>
                 <input
                     value={this.state.searchQuery}
-                    onChange={this.inputChangeHandler} A
+                    onChange={this.inputChangeHandler} 
                 />
                 <button onClick={this.searchButtonHandler}>Search</button>
+                <RecipeResults
+                searchResults={this.state.searchResults} />
 
 
             </div>
