@@ -21,17 +21,24 @@ export default class AddRecipe extends Component {
         this.transferResult(response)
     }
 
+    handleClose = () => this.setState({
+        searchQuery: '',
+        searchResults: []
+    })
+
     render() {
         return (
             <div>
                 <h2>Search for a Recipe</h2>
                 <input
                     value={this.state.searchQuery}
-                    onChange={this.inputChangeHandler} 
+                    onChange={this.inputChangeHandler}
                 />
                 <button onClick={this.searchButtonHandler}>Search</button>
                 <SearchResults
-                searchResults={this.state.searchResults} />
+                    searchResults={this.state.searchResults}
+                    addNewRecipe={this.props.addNewRecipe} 
+                    handleClose={this.handleClose}/>
 
 
             </div>

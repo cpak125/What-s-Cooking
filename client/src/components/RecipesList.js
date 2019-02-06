@@ -27,8 +27,8 @@ export default class RecipesList extends Component {
             <div>
                 <h1>Recipes</h1>
                 <button onClick={this.toggleAddRecipe}>Add New Recipe</button>
-                
-                {this.state.addRecipe ? <AddRecipe /> : null}
+
+                {this.state.addRecipe ? <AddRecipe addNewRecipe={this.props.addNewRecipe} /> : null}
                 {this.props.recipes.length > 0 ? recipes : null}
             </div>
         )

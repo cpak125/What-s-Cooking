@@ -1,18 +1,25 @@
 import React, { Component } from 'react'
-// import {Link} from 'react-router-dom'
+import SearchResult from './SearchResult';
 
 export default class SearchResults extends Component {
     render() {
         const recipeResults = this.props.searchResults.map((recipe, i) => {
             return (
 
-                <div key={i}>
-                    <div>{recipe.recipe.label}</div>
-                    <img src={recipe.recipe.image} alt='recipe img' />
-                </div>
+                <SearchResult
+                    key={i}
+                    name={recipe.recipe.label}
+                    ingredients={recipe.recipe.ingredientLines}
+                    servings={recipe.recipe.yield}
+                    cal_per_serving={recipe.recipe.calories}
+                    instructions={recipe.recipe.url}
+                    img={recipe.recipe.image}
+                    addNewRecipe={this.props.addNewRecipe}
+                    handleClose={this.props.handleClose}
+                />
             )
         })
-        
+
         return (
             <div>
                 {recipeResults}

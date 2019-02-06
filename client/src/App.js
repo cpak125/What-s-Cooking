@@ -14,38 +14,65 @@ class App extends Component {
     signedIn: false,
     recipes: [],
     newRecipe: {
-      name:'',
-      ingredients:'',
-      servings:'',
-      cal_per_serving:'',
-      instructions:'',
-      img:''
+      name: '',
+      ingredients: '',
+      servings: '',
+      cal_per_serving: '',
+      instructions: '',
+      img: ''
     }
   }
 
-  async componentWillMount() {
+  async componentDidMount() {
     const signedIn = userIsLoggedIn()
 
-    let recipes = []
+    // let recipes = []
     if (signedIn) {
       setAxiosDefaults()
-      recipes = await this.getRecipes()
+      await this.getRecipes()
+      // recipes = await this.getRecipes()
     }
 
     this.setState({
-      recipes,
+      // recipes,
       signedIn
     })
   }
 
   getRecipes = async () => {
     const response = await axios.get('/recipes')
-    return response.data
+    this.setState({
+      recipes:response.data
+    })
+    // return response.data
 
   }
 
   addNewRecipe = async (name, ingredients, servings, cal_per_serving, instructions, img) => {
+    const newRecipe = { ...this.state.newRecipe }
+    newRecipe.name = name
+    newRecipe.ingredients = ingredients
+    newRecipe.servings = servings
+    newRecipe.cal_per_serving = cal_per_serving
+    newRecipe.instructions = instructions
+    newRecipe.img = img
+    await this.setState({ newRecipe })
+    this.handleSubmitRecipe()
+  }
 
+  handleSubmitRecipe = async () => {
+    await axios.post('/recipes', this.state.newRecipe)
+    await this.getRecipes()
+    this.setState({
+      newRecipe: {
+        name: '',
+        ingredients: '',
+        servings: '',
+        cal_per_serving: '',
+        instructions: '',
+        img: ''
+      }
+    })
   }
 
   deleteRecipe = async (recipeId) => {
@@ -78,6 +105,7 @@ class App extends Component {
     const RecipesComponent = () => (
       <RecipesList
         recipes={this.state.recipes}
+        addNewRecipe={this.addNewRecipe}
         deleteRecipe={this.deleteRecipe} />
     )
 
@@ -90,7 +118,7 @@ class App extends Component {
           <Switch>
             <Route exact path='/signUp' render={SignUpLogInComponent} />
             <Route exact path='/recipes' render={RecipesComponent} />
-            <Route exact path='/recipes/:id' component={Recipe}  />
+            <Route exact path='/recipes/:id' component={Recipe} />
           </Switch>
 
           {this.state.signedIn ? <Redirect to='/recipes/' /> : <Redirect to='/signUp' />}
