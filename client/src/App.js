@@ -12,7 +12,15 @@ import Recipe from './components/Recipe';
 class App extends Component {
   state = {
     signedIn: false,
-    recipes: []
+    recipes: [],
+    newRecipe: {
+      name:'',
+      ingredients:'',
+      servings:'',
+      cal_per_serving:'',
+      instructions:'',
+      img:''
+    }
   }
 
   async componentWillMount() {
@@ -33,6 +41,10 @@ class App extends Component {
   getRecipes = async () => {
     const response = await axios.get('/recipes')
     return response.data
+
+  }
+
+  addNewRecipe = async (name, ingredients, servings, cal_per_serving, instructions, img) => {
 
   }
 
