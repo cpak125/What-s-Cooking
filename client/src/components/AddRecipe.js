@@ -38,7 +38,9 @@ export default class AddRecipe extends Component {
                 <SearchResults
                     searchResults={this.state.searchResults}
                     addNewRecipe={this.props.addNewRecipe} 
-                    handleClose={this.handleClose}/>
+                    handleClose={this.handleClose}
+                    toggleAddRecipe={this.props.toggleAddRecipe}
+                    />
 
 
             </div>

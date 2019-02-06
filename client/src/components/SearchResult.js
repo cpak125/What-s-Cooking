@@ -4,6 +4,7 @@ export default class SearchResult extends Component {
     addNewRecipe = (name, servings, calPerServing, ingredients, instructions, img) => {
         this.props.addNewRecipe(name, servings, calPerServing, ingredients, instructions, img)
         this.props.handleClose()
+        this.props.toggleAddRecipe()
     }
     render() {
         return (

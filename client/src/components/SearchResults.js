@@ -16,6 +16,7 @@ export default class SearchResults extends Component {
                     img={recipe.recipe.image}
                     addNewRecipe={this.props.addNewRecipe}
                     handleClose={this.props.handleClose}
+                    toggleAddRecipe={this.props.toggleAddRecipe}
                 />
             )
         })

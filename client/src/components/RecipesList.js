@@ -14,9 +14,8 @@ export default class RecipesList extends Component {
     render() {
         const recipes = this.props.recipes.map((recipe, i) => {
             return (
-                // <Recipe {...recipe} deleteRecipe={this.props.deleteRecipe} key={recipe.id} />
                 <div key={i}>
-                    <Link to={`/recipes/:id`} {...recipe}>
+                    <Link to={`/recipes/${recipe.id}`} >
                         <h2>{recipe.name}</h2>
                         <img src={recipe.img} alt='recipe img' />
                     </Link>
@@ -28,7 +27,11 @@ export default class RecipesList extends Component {
                 <h1>Recipes</h1>
                 <button onClick={this.toggleAddRecipe}>Add New Recipe</button>
 
-                {this.state.addRecipe ? <AddRecipe addNewRecipe={this.props.addNewRecipe} /> : null}
+                {this.state.addRecipe ? 
+                    <AddRecipe toggleAddRecipe={this.toggleAddRecipe}
+                    addNewRecipe={this.props.addNewRecipe} />
+                    : null}
+
                 {this.props.recipes.length > 0 ? recipes : null}
             </div>
         )
