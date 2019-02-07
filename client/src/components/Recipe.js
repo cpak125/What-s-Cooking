@@ -3,37 +3,48 @@ import axios from 'axios';
 
 export default class Recipe extends Component {
     state = {
-        recipe: {}
+        recipe: {},
+        redirect: false
     }
-    async componentDidMount() {
-        const recipeResponse = await this.fetchRecipe()
+
+    componentDidMount = async () => {
+        const recipeResponse = await this.getRecipe()
 
         this.setState({
             recipe: recipeResponse.data
         })
     }
 
-    fetchRecipe = async () => {
+    getRecipe = async () => {
         const recipeId = this.props.match.params.id
         return await axios.get(`/recipes/${recipeId}`)
     }
 
-    render() {
-        const deleteRecipe = () => {
-            this.props.deleteRecipe()
-        }
+    getRecipes = async () => {
+        const response = await axios.get('/recipes')
+        return response.data
+    }
 
-        const recipe=this.state.recipe
+    deleteRecipe = async () => {
+        const recipeId = this.props.match.params.id
+        await axios.delete(`/recipes/${recipeId}`)
+        window.location.reload()
+    }
+
+
+    render() {
+
+        const recipe = this.state.recipe
 
         return (
             <div>
+                <div><h2>{recipe.name}</h2></div>
                 <img src={recipe.img} alt='recipe img' />
-                <div><h2>{this.props.name}</h2></div>
-                <div>{this.props.ingredients}</div>
-                <div>{this.props.cal_per_serving}</div>
-                <div>{this.props.servings}</div>
-                <div>{this.props.instructions}</div>
-                <div><button onClick={deleteRecipe}>Delete</button></div>
+                <div>{recipe.ingredients}</div>
+                <div>{recipe.cal_per_serving}</div>
+                <div>{recipe.servings}</div>
+                <div>{recipe.instructions}</div>
+                <div><button onClick={() => this.deleteRecipe(recipe.id)}>Delete</button></div>
             </div>
         )
     }

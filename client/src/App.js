@@ -23,29 +23,24 @@ class App extends Component {
     }
   }
 
-  async componentDidMount() {
+   componentDidMount = async () => {
     const signedIn = userIsLoggedIn()
 
-    // let recipes = []
+    let recipes = []
     if (signedIn) {
       setAxiosDefaults()
-      await this.getRecipes()
-      // recipes = await this.getRecipes()
+      recipes = await this.getRecipes()
     }
 
     this.setState({
-      // recipes,
+      recipes,
       signedIn
     })
   }
 
   getRecipes = async () => {
     const response = await axios.get('/recipes')
-    this.setState({
-      recipes:response.data
-    })
-    // return response.data
-
+    return response.data
   }
 
   addNewRecipe = async (name, ingredients, servings, cal_per_serving, instructions, img) => {
@@ -62,7 +57,7 @@ class App extends Component {
 
   handleSubmitRecipe = async () => {
     await axios.post('/recipes', this.state.newRecipe)
-    await this.getRecipes()
+    const recipes = await this.getRecipes()
     this.setState({
       newRecipe: {
         name: '',
@@ -71,7 +66,8 @@ class App extends Component {
         cal_per_serving: '',
         instructions: '',
         img: ''
-      }
+      },
+      recipes
     })
   }
 
@@ -106,7 +102,7 @@ class App extends Component {
       <RecipesList
         recipes={this.state.recipes}
         addNewRecipe={this.addNewRecipe}
-        deleteRecipe={this.deleteRecipe} />
+      />
     )
 
     return (
@@ -114,14 +110,13 @@ class App extends Component {
         <div className='App'>
           <GlobalNav signedIn={this.state.signedIn} signOut={this.signOut} />
 
-
           <Switch>
             <Route exact path='/signUp' render={SignUpLogInComponent} />
             <Route exact path='/recipes' render={RecipesComponent} />
             <Route exact path='/recipes/:id' component={Recipe} />
           </Switch>
 
-          {this.state.signedIn ? <Redirect to='/recipes/' /> : <Redirect to='/signUp' />}
+          {this.state.signedIn ? <Redirect to='/recipes' /> : <Redirect to='/signUp' />}
         </div>
       </Router>
     )
