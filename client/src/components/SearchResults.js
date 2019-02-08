@@ -9,9 +9,9 @@ export default class SearchResults extends Component {
                 <SearchResult
                     key={i}
                     name={recipe.recipe.label}
-                    ingredients={recipe.recipe.ingredientLines}
+                    ingredients={recipe.recipe.ingredients.map(ingredient => ingredient.text).toString()}
                     servings={recipe.recipe.yield}
-                    cal_per_serving={recipe.recipe.calories}
+                    calories={Math.round(recipe.recipe.calories)}
                     instructions={recipe.recipe.url}
                     img={recipe.recipe.image}
                     addNewRecipe={this.props.addNewRecipe}

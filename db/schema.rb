@@ -18,8 +18,8 @@ ActiveRecord::Schema.define(version: 2019_01_14_210557) do
   create_table "recipes", force: :cascade do |t|
     t.string "name"
     t.string "ingredients"
-    t.integer "cal_per_serving"
     t.integer "servings"
+    t.integer "calories"
     t.string "instructions"
     t.string "img"
     t.bigint "user_id"

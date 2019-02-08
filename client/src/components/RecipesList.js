@@ -32,7 +32,7 @@ export default class RecipesList extends Component {
                     addNewRecipe={this.props.addNewRecipe} />
                     : null}
 
-                {this.props.recipes.length > 0 ? recipes : null}
+                {recipes}
             </div>
         )
     }

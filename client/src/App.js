@@ -17,7 +17,7 @@ class App extends Component {
       name: '',
       ingredients: '',
       servings: '',
-      cal_per_serving: '',
+      calories: '',
       instructions: '',
       img: ''
     }
@@ -43,12 +43,12 @@ class App extends Component {
     return response.data
   }
 
-  addNewRecipe = async (name, ingredients, servings, cal_per_serving, instructions, img) => {
+  addNewRecipe = async (name, ingredients, servings, calories, instructions, img) => {
     const newRecipe = { ...this.state.newRecipe }
     newRecipe.name = name
     newRecipe.ingredients = ingredients
     newRecipe.servings = servings
-    newRecipe.cal_per_serving = cal_per_serving
+    newRecipe.calories= calories
     newRecipe.instructions = instructions
     newRecipe.img = img
     await this.setState({ newRecipe })
@@ -63,7 +63,7 @@ class App extends Component {
         name: '',
         ingredients: '',
         servings: '',
-        cal_per_serving: '',
+        calories: '',
         instructions: '',
         img: ''
       },
