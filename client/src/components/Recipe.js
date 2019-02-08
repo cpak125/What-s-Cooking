@@ -29,19 +29,30 @@ export default class Recipe extends Component {
     render() {
 
         const recipe = this.state.recipe
-        // console.log(calories)
-        // const servings= recipe.servings
+
+        const ingredientsStr = recipe.ingredients + ''
+
+        const ingStrSplit = ingredientsStr.split(',')
+
+        const ingredientsList = ingStrSplit.map((ingredient, i) => {
+            return (
+                <div key={i}>{ingredient}</div>
+            )
+        })
+
+        console.log(typeof ingredientsStr)
 
 
         return (
             <div>
                 <div><h2>{recipe.name}</h2></div>
                 <img src={recipe.img} alt='recipe img' />
-                <div>Calories/Serving: {recipe.calories/recipe.servings}</div>
-                <div>Ingredients: {recipe.ingredients}</div>
-                {/* <div>Calories/serving: {calPerServing}</div> */}
-                <div>Servings: {recipe.servings}</div>
-                <div><a target='_blank' rel="noopener noreferrer" href={recipe.instructions}>Instructions </a></div>
+                <div><h3>Servings:</h3> {recipe.servings}</div>
+                <div><h3>Calories/Serving:</h3> {Math.round(recipe.calories / recipe.servings)}</div>
+                <div> <h3>Ingredients:</h3>
+                    {ingredientsList}
+                </div>
+                <div><a target='_blank' rel="noopener noreferrer" href={recipe.instructions}><h3>Instructions</h3> </a></div>
                 <div><button onClick={() => this.deleteRecipe(recipe.id)}>Delete</button></div>
             </div>
         )

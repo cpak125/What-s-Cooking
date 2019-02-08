@@ -9,7 +9,7 @@ export default class SearchResults extends Component {
                 <SearchResult
                     key={i}
                     name={recipe.recipe.label}
-                    ingredients={recipe.recipe.ingredients.map(ingredient => ingredient.text).toString()}
+                    ingredients={recipe.recipe.ingredients.map(ingredient => ingredient.text).join()}
                     servings={recipe.recipe.yield}
                     calories={Math.round(recipe.recipe.calories)}
                     instructions={recipe.recipe.url}
