@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { Card, Image, Menu, Icon, Grid, Header } from 'semantic-ui-react'
 import AddRecipe from './AddRecipe';
 
 export default class RecipesList extends Component {
@@ -14,12 +15,12 @@ export default class RecipesList extends Component {
     render() {
         const recipes = this.props.recipes.map((recipe, i) => {
             return (
-                <div key={i}>
-                    <Link to={`/recipes/${recipe.id}`} >
-                        <h2>{recipe.name}</h2>
-                        <img src={recipe.img} alt='recipe img' />
-                    </Link>
-                </div>
+                <Grid.Column key={i}>
+                    <Card link as={Link} to={`/recipes/${recipe.id}`} >
+                        <Card.Header>{recipe.name}</Card.Header>
+                        <Image src={recipe.img} alt='recipe img' />
+                    </Card>
+                </Grid.Column>
             )
         })
         return (
@@ -27,12 +28,13 @@ export default class RecipesList extends Component {
                 <h1>Recipes</h1>
                 <button onClick={this.toggleAddRecipe}>Add New Recipe</button>
 
-                {this.state.addRecipe ? 
+                {this.state.addRecipe ?
                     <AddRecipe toggleAddRecipe={this.toggleAddRecipe}
-                    addNewRecipe={this.props.addNewRecipe} />
+                        addNewRecipe={this.props.addNewRecipe} />
                     : null}
-
-                {recipes}
+                <Grid columns={5} padded doubling>
+                    {recipes}
+                </Grid>
             </div>
         )
     }
