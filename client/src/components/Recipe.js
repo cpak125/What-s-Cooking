@@ -32,16 +32,13 @@ export default class Recipe extends Component {
 
         const ingredientsStr = recipe.ingredients + ''
 
-        const ingStrSplit = ingredientsStr.split(',')
+        const ingStrSplit = ingredientsStr.split(/,(?! )/)
 
         const ingredientsList = ingStrSplit.map((ingredient, i) => {
             return (
                 <div key={i}>{ingredient}</div>
             )
         })
-
-        console.log(typeof ingredientsStr)
-
 
         return (
             <div>
