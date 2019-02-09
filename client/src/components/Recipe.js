@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import axios from 'axios';
-import { Grid, Image, Button } from 'semantic-ui-react';
+import { Grid, Image, Button, Icon } from 'semantic-ui-react';
 
 export default class Recipe extends Component {
     state = {
@@ -43,9 +44,20 @@ export default class Recipe extends Component {
 
         return (
             <Grid padded stackable>
-                <Grid.Row centered>
-                    <h2>{recipe.name}</h2>
-                    <Button floated='right' color='red' size='mini' icon='trash alternate' onClick={() => this.deleteRecipe(recipe.id)}>Delete</Button>
+                <Grid.Row >
+                    <Grid.Column width={2}>
+                        <Link to='/recipes'>
+                            <Icon size='large' link name='arrow left' />
+                        </Link>
+                    </Grid.Column>
+
+                    <Grid.Column width={12}>
+                        <h2>{recipe.name}</h2>
+                    </Grid.Column>
+
+                    <Grid.Column width={2}>
+                        <Button color='red' size='small' icon='trash alternate' onClick={() => this.deleteRecipe(recipe.id)}>Delete</Button>
+                    </Grid.Column>
                 </Grid.Row>
 
                 <Grid.Row centered>
@@ -54,23 +66,23 @@ export default class Recipe extends Component {
                     </Grid.Column>
 
                     <Grid.Column verticalAlign="middle" width={3}>
-                            <h3>{recipe.servings}</h3>
-                            Servings
+                        <h3>{recipe.servings}</h3>
+                        Servings
                     </Grid.Column>
 
                     <Grid.Column verticalAlign='middle' width={3}>
-                            <h3>{Math.round(recipe.calories / recipe.servings)}</h3>
-                            Calories/Serving:
+                        <h3>{Math.round(recipe.calories / recipe.servings)}</h3>
+                        Calories/Serving:
                     </Grid.Column>
                 </Grid.Row>
 
-                <Grid.Row style={{height:'60vh'}}>
-                    <Grid.Column floated='right' stretched width={10}>
+                <Grid.Row centered style={{ height: '60vh' }}>
+                    <Grid.Column textAlign='left' stretched width={5}>
                         <h3>Ingredients:</h3>
                         {ingredientsList}
                     </Grid.Column>
 
-                    <Grid.Column textAlign='left' width={6}>
+                    <Grid.Column textAlign='center' width={5}>
                         <h3>Preparation</h3>
                         <a target='_blank' rel="noopener noreferrer" href={recipe.instructions}><h4>Instructions</h4></a>
                     </Grid.Column>
