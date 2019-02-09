@@ -6,12 +6,6 @@ export default class SearchResult extends Component {
         openPreview: false
     }
 
-    addNewRecipe = (name, ingredients, servings, calories, instructions, img) => {
-        this.props.addNewRecipe(name, ingredients, servings, calories, instructions, img)
-        this.props.handleClose()
-        this.props.toggleAddRecipe()
-    }
-
     togglePreview = () => {
         this.setState({ openPreview: !this.state.openPreview })
     }
@@ -19,16 +13,22 @@ export default class SearchResult extends Component {
     render() {
         return (
             <div>
-            {this.state.openPreview ? 
-                <Preview /> :
+                {this.state.openPreview ?
+                    <Preview
+                        name={this.props.name}
+                        img={this.props.img}
+                        ingredients={this.props.ingredients}
+                        servings={this.props.servings}
+                        calories={this.props.calories}
+                        instructions={this.props.instructions}
+                        addNewRecipe={this.props.addNewRecipe}
+                        handleClose={this.props.handleClose}
+                        toggleAddRecipe={this.props.toggleAddRecipe}
+                        togglePreview={this.togglePreview}
+                    /> :
                     <div onClick={this.togglePreview}>
                         <h2>{this.props.name}</h2>
                         <img src={this.props.img} alt='recipe img' />
-                        {/* <button onClick={() => this.addNewRecipe(
-                            this.props.name, this.props.ingredients, this.props.servings,
-                            this.props.calories, this.props.instructions, this.props.img)}
-                        > Add to Recipes
-                </button> */}
                     </div>}
             </div>
 
