@@ -25,7 +25,7 @@ export default class RecipesList extends Component {
         })
         return (
             <div>
-                <h1>Recipes</h1>
+                <h1>My Recipes</h1>
                 <button onClick={this.toggleAddRecipe}>Add New Recipe</button>
 
                 {this.state.addRecipe ?

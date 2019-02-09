@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios';
+import { Grid, Image, Button } from 'semantic-ui-react';
 
 export default class Recipe extends Component {
     state = {
@@ -41,17 +42,41 @@ export default class Recipe extends Component {
         })
 
         return (
-            <div>
-                <div><h2>{recipe.name}</h2></div>
-                <img src={recipe.img} alt='recipe img' />
-                <div><h3>Servings:</h3> {recipe.servings}</div>
-                <div><h3>Calories/Serving:</h3> {Math.round(recipe.calories / recipe.servings)}</div>
-                <div> <h3>Ingredients:</h3>
-                    {ingredientsList}
-                </div>
-                <div><a target='_blank' rel="noopener noreferrer" href={recipe.instructions}><h3>Instructions</h3> </a></div>
-                <div><button onClick={() => this.deleteRecipe(recipe.id)}>Delete</button></div>
-            </div>
+            <Grid padded stackable>
+                <Grid.Row centered>
+                    <h2>{recipe.name}</h2>
+                    <Button floated='right' color='red' size='mini' icon='trash alternate' onClick={() => this.deleteRecipe(recipe.id)}>Delete</Button>
+                </Grid.Row>
+
+                <Grid.Row centered>
+                    <Grid.Column width={6}>
+                        <Image centered src={recipe.img} alt='recipe img' />
+                    </Grid.Column>
+
+                    <Grid.Column verticalAlign="middle" width={3}>
+                            <h3>{recipe.servings}</h3>
+                            Servings
+                    </Grid.Column>
+
+                    <Grid.Column verticalAlign='middle' width={3}>
+                            <h3>{Math.round(recipe.calories / recipe.servings)}</h3>
+                            Calories/Serving:
+                    </Grid.Column>
+                </Grid.Row>
+
+                <Grid.Row style={{height:'60vh'}}>
+                    <Grid.Column floated='right' stretched width={10}>
+                        <h3>Ingredients:</h3>
+                        {ingredientsList}
+                    </Grid.Column>
+
+                    <Grid.Column textAlign='left' width={6}>
+                        <h3>Preparation</h3>
+                        <a target='_blank' rel="noopener noreferrer" href={recipe.instructions}><h4>Instructions</h4></a>
+                    </Grid.Column>
+                </Grid.Row>
+
+            </Grid>
         )
     }
 }
