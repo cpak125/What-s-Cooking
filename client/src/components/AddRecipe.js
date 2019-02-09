@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import SearchResults from './SearchResults';
+import { Input, Button, Icon } from 'semantic-ui-react';
 
 export default class AddRecipe extends Component {
     state = {
@@ -26,21 +27,36 @@ export default class AddRecipe extends Component {
         searchResults: []
     })
 
+    handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            this.searchButtonHandler()
+        }
+    }
+
     render() {
         return (
             <div>
-                <h2>Search for a Recipe</h2>
-                <input
+                <Input
+                    type='text'
+                    focus
+                    style={{width:'50vw'}}
+                    placeholder='Search for a Recipe...'
                     value={this.state.searchQuery}
                     onChange={this.inputChangeHandler}
-                />
-                <button onClick={this.searchButtonHandler}>Search</button>
+                    onKeyPress={this.handleKeyPress}
+                >
+                <input/>
+                    <Button icon onClick={this.searchButtonHandler}>
+                        <Icon name='search' />
+                    </Button>
+                </Input>
+
                 <SearchResults
                     searchResults={this.state.searchResults}
-                    addNewRecipe={this.props.addNewRecipe} 
+                    addNewRecipe={this.props.addNewRecipe}
                     handleClose={this.handleClose}
                     toggleAddRecipe={this.props.toggleAddRecipe}
-                    />
+                />
 
 
             </div>
