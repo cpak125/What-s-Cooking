@@ -60,7 +60,7 @@ export default class Recipe extends Component {
                     </Grid.Column>
                 </Grid.Row>
 
-                <Grid.Row centered>
+                <Grid.Row  divided centered>
                     <Grid.Column width={6}>
                         <Image centered src={recipe.img} alt='recipe img' />
                     </Grid.Column>
@@ -76,7 +76,7 @@ export default class Recipe extends Component {
                     </Grid.Column>
                 </Grid.Row>
 
-                <Grid.Row centered style={{ height: '60vh' }}>
+                <Grid.Row  divided centered style={{ height: '60vh' }}>
                     <Grid.Column textAlign='left' stretched width={5}>
                         <h3>Ingredients:</h3>
                         {ingredientsList}

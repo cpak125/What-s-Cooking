@@ -4,13 +4,6 @@ import { Card, Image, Menu, Icon, Grid, Header, Button } from 'semantic-ui-react
 import AddRecipe from './AddRecipe';
 
 export default class RecipesList extends Component {
-    state = {
-        addRecipe: false
-    }
-
-    toggleAddRecipe = () => {
-        this.setState({ addRecipe: !this.state.addRecipe })
-    }
 
     render() {
         const recipes = this.props.recipes.map((recipe, i) => {
@@ -27,10 +20,9 @@ export default class RecipesList extends Component {
             <div>
                 <h1>My Recipes</h1>
 
-                
-                    <AddRecipe toggleAddRecipe={this.toggleAddRecipe}
-                        addNewRecipe={this.props.addNewRecipe} />
-    
+
+                <AddRecipe addNewRecipe={this.props.addNewRecipe} />
+
                 <Grid columns={5} padded doubling>
                     {recipes}
                 </Grid>

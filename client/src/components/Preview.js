@@ -5,7 +5,6 @@ export default class Preview extends Component {
     addNewRecipe = (name, ingredients, servings, calories, instructions, img) => {
         this.props.addNewRecipe(name, ingredients, servings, calories, instructions, img)
         this.props.handleClose()
-        this.props.toggleAddRecipe()
     }
 
     render() {

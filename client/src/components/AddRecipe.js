@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
-import axios from 'axios';
-import SearchResults from './SearchResults';
-import { Input, Button, Icon } from 'semantic-ui-react';
+import axios from 'axios'
+import SearchResults from './SearchResults'
+import { Input, Button, Icon, Modal } from 'semantic-ui-react'
 
 export default class AddRecipe extends Component {
     state = {
         searchQuery: '',
-        searchResults: []
+        searchResults: [],
+        modalOpen: false
     }
 
     transferResult = (response) => {
@@ -20,11 +21,15 @@ export default class AddRecipe extends Component {
     searchButtonHandler = async () => {
         const response = await axios.get(`https://api.edamam.com/search?q=${this.state.searchQuery}&app_id=${process.env.REACT_APP_API_ID}&app_key=${process.env.REACT_APP_API_KEY}&from=0&to=25`)
         this.transferResult(response)
+        this.handleOpen()
     }
+
+    handleOpen = () => this.setState({ modalOpen: true })
 
     handleClose = () => this.setState({
         searchQuery: '',
-        searchResults: []
+        searchResults: [],
+        modalOpen: false
     })
 
     handleKeyPress = (event) => {
@@ -39,24 +44,33 @@ export default class AddRecipe extends Component {
                 <Input
                     type='text'
                     focus
-                    style={{width:'50vw'}}
+                    style={{ width: '50vw' }}
                     placeholder='Search for a Recipe...'
                     value={this.state.searchQuery}
                     onChange={this.inputChangeHandler}
-                    onKeyPress={this.handleKeyPress}
-                >
-                <input/>
-                    <Button icon onClick={this.searchButtonHandler}>
-                        <Icon name='search' />
-                    </Button>
+                    onKeyPress={this.handleKeyPress} >
+
                 </Input>
 
-                <SearchResults
-                    searchResults={this.state.searchResults}
-                    addNewRecipe={this.props.addNewRecipe}
-                    handleClose={this.handleClose}
-                    toggleAddRecipe={this.props.toggleAddRecipe}
-                />
+                <Modal
+                    trigger={
+                        <Button icon onClick={this.searchButtonHandler}>
+                            <Icon name='search' />
+                        </Button>}
+                    size='fullscreen'
+                    closeIcon
+                    centered={false}
+                    open={this.state.modalOpen}
+                    onClose={this.handleClose} >
+
+                    <Modal.Content>
+                        <SearchResults
+                            searchResults={this.state.searchResults}
+                            addNewRecipe={this.props.addNewRecipe}
+                            handleClose={this.handleClose} />
+                    </Modal.Content>
+
+                </Modal>
 
 
             </div>

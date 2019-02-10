@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import SearchResult from './SearchResult';
+import { Grid } from 'semantic-ui-react';
 
 export default class SearchResults extends Component {
     render() {
@@ -23,7 +24,9 @@ export default class SearchResults extends Component {
 
         return (
             <div>
-                {recipeResults}
+                <Grid columns={5} relaxed doubling>
+                    {recipeResults}
+                </Grid>
             </div>
         )
     }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Preview from './Preview';
+import { Grid, Image, Card, CardDescription } from 'semantic-ui-react';
 
 export default class SearchResult extends Component {
     state = {
@@ -26,10 +27,15 @@ export default class SearchResult extends Component {
                         toggleAddRecipe={this.props.toggleAddRecipe}
                         togglePreview={this.togglePreview}
                     /> :
-                    <div onClick={this.togglePreview}>
-                        <h2>{this.props.name}</h2>
-                        <img src={this.props.img} alt='recipe img' />
-                    </div>}
+                    <div>
+                        <Grid.Column style={{ padding: '0 0 3vw 0' }}>
+                            <Card style={{ width: '20vw' }} onClick={this.togglePreview}>
+                                <Card.Header textAlign='center'>{this.props.name}</Card.Header>
+                                <Image src={this.props.img} alt='recipe img' />
+                            </Card>
+                        </Grid.Column>
+                    </div>
+                }
             </div>
 
         )
