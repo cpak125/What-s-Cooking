@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { Card, Image, Menu, Icon, Grid, Header, Button } from 'semantic-ui-react'
+import { Card, Image, Grid} from 'semantic-ui-react'
 import AddRecipe from './AddRecipe';
 
 export default class RecipesList extends Component {

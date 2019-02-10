@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Preview from './Preview';
-import { Grid, Image, Card, CardDescription } from 'semantic-ui-react';
+import { Grid, Image, Card} from 'semantic-ui-react';
 
 export default class SearchResult extends Component {
     state = {
@@ -24,8 +24,8 @@ export default class SearchResult extends Component {
                         instructions={this.props.instructions}
                         addNewRecipe={this.props.addNewRecipe}
                         handleClose={this.props.handleClose}
-                        toggleAddRecipe={this.props.toggleAddRecipe}
                         togglePreview={this.togglePreview}
+                        openPreview={this.state.openPreview}
                     /> :
                     <Grid.Column style={{ padding: '0 0 3vw 0' }}>
                         <Card style={{ width: '20vw' }} onClick={this.togglePreview}>
