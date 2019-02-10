@@ -39,7 +39,6 @@ export default class SignUpLogIn extends Component {
         )
         return (
             <div>
-
                 {this.state.showLogin ? login : signUp}
             </div>
         )

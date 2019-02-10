@@ -10,9 +10,9 @@ export default class RecipesList extends Component {
             return (
                 <Grid.Column key={i}>
                     <Card link as={Link} to={`/recipes/${recipe.id}`} >
+                    <Image src={recipe.img} alt='recipe img' />
                         <Card.Content>
                             <Card.Header>{recipe.name}</Card.Header>
-                            <Image src={recipe.img} alt='recipe img' />
                             <Card.Description>{Math.round(recipe.calories/recipe.servings)} Calories | {recipe.servings} Servings</Card.Description>
                         </Card.Content>
                     </Card>

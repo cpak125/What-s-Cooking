@@ -10,7 +10,7 @@ const LoginWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
-  width: 300px;
+  width: 50vw;
   z-index: 3;
 `
 
@@ -27,7 +27,7 @@ const LoginInput = styled.input`
 `
 
 const LoginFormWrapper = styled.div`
-  width: 100%;
+  width: 40vw;
 `
 
 const LoginButtonWrapper = styled.div`
@@ -85,7 +85,7 @@ export default class Login extends Component {
 
   render() {
     return (
-      <div>
+      
         <LoginWrapper>
           <h1>Log In</h1>
           <LoginFormWrapper>
@@ -109,12 +109,12 @@ export default class Login extends Component {
           <LoginButtonWrapper>
             <LoginButton onClick={this.signIn}>Log In</LoginButton>
           </LoginButtonWrapper>
+          {this.state.error ? <FlashError error={this.state.error} dismissError={this.dismissError} /> : null}
 
         </LoginWrapper>
         
-        {this.state.error ? <FlashError error={this.state.error} dismissError={this.dismissError} /> : null}
 
-      </div>
+      
     )
   }
 }

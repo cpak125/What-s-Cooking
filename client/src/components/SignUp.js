@@ -10,8 +10,8 @@ const SignUpLogInWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
-  width: 300px;
-  z-index: 3;
+  width: 50vw;
+  z-index: 40vw;
 `
 
 const SignUpInput = styled.input`
@@ -20,11 +20,11 @@ const SignUpInput = styled.input`
   margin-bottom: 15px;
   border-radius: 2px;
   border: 1px solid lightgray;
-  width: 70%;
+  width: 40vw;
 `
 
 const SignUpFormWrapper = styled.div`
-  width: 100%;
+  width: 40vw;
 `
 
 const SignUpButtonWrapper = styled.div`

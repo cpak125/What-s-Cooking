@@ -24,7 +24,7 @@ export default class SearchResults extends Component {
 
         return (
             <div>
-                <Grid columns={5} relaxed doubling>
+                <Grid columns={4} padded doubling>
                     {recipeResults}
                 </Grid>
             </div>

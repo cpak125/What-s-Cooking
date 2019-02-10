@@ -27,11 +27,11 @@ export default class SearchResult extends Component {
                         togglePreview={this.togglePreview}
                         openPreview={this.state.openPreview}
                     /> :
-                    <Grid.Column style={{ padding: '0 0 3vw 0' }}>
-                        <Card style={{ width: '20vw' }} onClick={this.togglePreview}>
+                   <Grid.Column style={{ padding: '0 0 3vw 0'}}>
+                        <Card onClick={this.togglePreview}>
+                        <Image src={this.props.img} alt='recipe img' />
                             <Card.Content>
                                 <Card.Header textAlign='center'>{this.props.name}</Card.Header>
-                                <Image src={this.props.img} alt='recipe img' />
                                 <Card.Description textAlign='center'>{Math.round(this.props.calories / this.props.servings)} Calories | {this.props.servings} Servings</Card.Description>
                             </Card.Content>
                         </Card>

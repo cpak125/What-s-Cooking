@@ -38,16 +38,16 @@ export default class Recipe extends Component {
 
         const ingredientsList = ingStrSplit.map((ingredient, i) => {
             return (
-                <div key={i}>{ingredient}</div>
+                <div style={{padding: '0 0 15px 0'}} key={i}>{ingredient}</div>
             )
         })
 
         return (
-            <Grid padded stackable>
+            <Grid relaxed stackable>
                 <Grid.Row >
                     <Grid.Column width={2}>
                         <Link to='/recipes'>
-                            <Icon size='large' link name='arrow left' />
+                            <Icon size='big' link name='arrow left' />
                         </Link>
                     </Grid.Column>
 
@@ -56,7 +56,9 @@ export default class Recipe extends Component {
                     </Grid.Column>
 
                     <Grid.Column width={2}>
-                        <Button color='red' size='small' icon='trash alternate' onClick={() => this.deleteRecipe(recipe.id)}>Delete</Button>
+                        <Button color='red' size='small' icon onClick={() => this.deleteRecipe(recipe.id)}>
+                        <Icon name='trash alternate' size='large' />
+                        </Button>
                     </Grid.Column>
                 </Grid.Row>
 
@@ -76,7 +78,7 @@ export default class Recipe extends Component {
                     </Grid.Column>
                 </Grid.Row>
 
-                <Grid.Row  divided centered style={{ height: '60vh' }}>
+                <Grid.Row  divided centered style={{ height: '70vh',padding:'0 0 20px 0' }}>
                     <Grid.Column textAlign='left' stretched width={5}>
                         <h3>Ingredients:</h3>
                         {ingredientsList}

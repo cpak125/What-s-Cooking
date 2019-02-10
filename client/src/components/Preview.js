@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Modal, Card, Image, Button } from 'semantic-ui-react';
+import { Modal, Grid, Image } from 'semantic-ui-react';
 
 export default class Preview extends Component {
     state = {
@@ -25,7 +25,7 @@ export default class Preview extends Component {
 
         const ingredientsList = ingStrSplit.map((ingredient, i) => {
             return (
-                <div key={i}>{ingredient}</div>
+                <div style={{padding: '0 0 15px 0'}} key={i}>{ingredient}</div>
             )
         })
         return (
@@ -34,11 +34,46 @@ export default class Preview extends Component {
             <Modal
                 size='fullscreen'
                 closeIcon
-                centered={false}
                 open={this.state.modalOpen}
                 onClose={this.handleClose} >
 
-                <Modal.Header>{this.props.name}</Modal.Header>
+                <Grid relaxed stackable>
+                    <Grid.Row style={{padding:'40px 0 0 0'}} centered textAlign='center'>
+                        <h2>{this.props.name}</h2>
+                    </Grid.Row>
+
+                    <Grid.Row divided centered >
+                        <Grid.Column width={6}>
+                            <Image centered src={this.props.img} alt='recipe img' />
+                        </Grid.Column>
+
+                        <Grid.Column verticalAlign="middle" width={3}>
+                            <h3>{this.props.servings}</h3>
+                            Servings
+                    </Grid.Column>
+
+                        <Grid.Column verticalAlign='middle' width={3}>
+                            <h3>{Math.round(this.props.calories / this.props.servings)}</h3>
+                            Calories/Serving:
+                    </Grid.Column>
+                    </Grid.Row>
+
+                    <Grid.Row style={{padding:'0 0 40px 0'}}divided centered>
+                        <Grid.Column textAlign='left' stretched width={5}>
+                            <h3>Ingredients:</h3>
+                            {ingredientsList}
+                        </Grid.Column>
+
+                        <Grid.Column textAlign='center' width={5}>
+                            <h3>Preparation</h3>
+                            <a target='_blank' rel="noopener noreferrer" href={this.props.instructions}><h4>Instructions</h4></a>
+                        </Grid.Column>
+
+                    </Grid.Row>
+
+                </Grid>
+
+                {/* <Modal.Header>{this.props.name}</Modal.Header>
                 <Modal.Content image>
                     <Image wrapped src={this.props.img} alt='recipe img' />
                     <Modal.Description>
@@ -57,7 +92,7 @@ export default class Preview extends Component {
                         this.props.calories, this.props.instructions, this.props.img)}
                     > Add to Recipes
                 </Button>
-                </Modal.Content>
+                </Modal.Content> */}
             </Modal>
         )
     }
