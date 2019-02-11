@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import SearchResults from './SearchResults'
-import { Input, Button, Icon, Modal } from 'semantic-ui-react'
+import { Input, Button, Icon, Modal, Image } from 'semantic-ui-react'
 
 export default class AddRecipe extends Component {
     state = {
@@ -72,7 +72,7 @@ export default class AddRecipe extends Component {
                     </Modal.Content>
                 </Modal>
 
-                <div id="edamam-badge" data-color="transparent"></div>
+                <Image centered src='../../img/edamam_logo.png' alt='edamam logo'></Image>
 
             </div>
         )
