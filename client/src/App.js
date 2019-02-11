@@ -111,12 +111,12 @@ class App extends Component {
           <GlobalNav signedIn={this.state.signedIn} signOut={this.signOut} />
 
           <Switch>
-            <Route exact path='/signUp' render={SignUpLogInComponent} />
+            <Route exact path='/' render={SignUpLogInComponent} />
             <Route exact path='/recipes' render={RecipesComponent} />
             <Route exact path='/recipes/:id' component={Recipe} />
           </Switch>
 
-          {this.state.signedIn ? <Redirect to='/recipes' /> : <Redirect to='/signUp' />}
+          {this.state.signedIn ? <Redirect to='/recipes' /> : <Redirect to='/' />}
         </div>
       </Router>
     )
