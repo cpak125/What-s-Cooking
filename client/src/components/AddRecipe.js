@@ -51,9 +51,7 @@ export default class AddRecipe extends Component {
                     value={this.state.searchQuery}
                     onChange={this.inputChangeHandler}
                     onKeyPress={this.handleKeyPress} >
-
                 </Input>
-
 
                 <Modal
                     trigger={
@@ -72,9 +70,9 @@ export default class AddRecipe extends Component {
                             addNewRecipe={this.props.addNewRecipe}
                             handleClose={this.handleClose} />
                     </Modal.Content>
-
                 </Modal>
 
+                <div id="edamam-badge" data-color="transparent"></div>
 
             </div>
         )
