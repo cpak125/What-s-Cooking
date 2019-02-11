@@ -78,7 +78,7 @@ export default class GlobalNav extends Component {
                 <GlobalNavLogoWrapper>
                     <div>
                         <GlobalNavLogo
-                            src="../img/whats_cooking_logo.jpg"
+                            src="../../img/whats_cooking_logo.jpg"
                             alt="Knife Logo" />
                         <GlobalNavHeader>What's Cooking</GlobalNavHeader>
                     </div>
