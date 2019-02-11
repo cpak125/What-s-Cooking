@@ -26,7 +26,6 @@ export default class Recipe extends Component {
         const recipeId = this.props.match.params.id
         await axios.delete(`/recipes/${recipeId}`)
         this.setState({ redirect: true })
-        window.location.reload()
     }
 
     render() {
@@ -44,7 +43,7 @@ export default class Recipe extends Component {
         })
 
         if(this.state.redirect) {
-            return(<Redirect to={'/recipes'} />)
+            return(<Redirect to={'/recipes/'} />)
         }
 
         return (
