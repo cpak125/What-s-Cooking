@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Modal, Grid, Image } from 'semantic-ui-react';
+import { Modal, Grid, Image, Button, Icon } from 'semantic-ui-react';
 
 export default class Preview extends Component {
     state = {
@@ -25,7 +25,7 @@ export default class Preview extends Component {
 
         const ingredientsList = ingStrSplit.map((ingredient, i) => {
             return (
-                <div style={{padding: '0 0 15px 0'}} key={i}>{ingredient}</div>
+                <div style={{ padding: '0 0 15px 0' }} key={i}>{ingredient}</div>
             )
         })
         return (
@@ -38,7 +38,7 @@ export default class Preview extends Component {
                 onClose={this.handleClose} >
 
                 <Grid relaxed stackable>
-                    <Grid.Row style={{padding:'40px 0 0 0'}} centered textAlign='center'>
+                    <Grid.Row style={{ padding: '40px 0 0 0' }} centered textAlign='center'>
                         <h2>{this.props.name}</h2>
                     </Grid.Row>
 
@@ -58,15 +58,26 @@ export default class Preview extends Component {
                     </Grid.Column>
                     </Grid.Row>
 
-                    <Grid.Row style={{padding:'0 0 40px 0'}}divided centered>
+                    <Grid.Row style={{ padding: '0 0 40px 0' }} divided centered>
                         <Grid.Column textAlign='left' stretched width={5}>
                             <h3>Ingredients:</h3>
                             {ingredientsList}
                         </Grid.Column>
 
-                        <Grid.Column textAlign='center' width={5}>
-                            <h3>Preparation</h3>
-                            <a target='_blank' rel="noopener noreferrer" href={this.props.instructions}><h4>Instructions</h4></a>
+                        <Grid.Column textAlign='center' stretched width={5}>
+                                <div>
+                                    <h3>Preparation</h3>
+                                    <a target='_blank' rel="noopener noreferrer" href={this.props.instructions}><h4>Instructions</h4></a>
+                                </div>
+                                <div>
+                                    <Button size ='large' icon labelPosition='left' color='green' onClick={() => this.addNewRecipe(
+                                        this.props.name, this.props.ingredients, this.props.servings,
+                                        this.props.calories, this.props.instructions, this.props.img)}
+                                    > 
+                                    <Icon name='plus square' />
+                                    Save
+                                    </Button>
+                                </div>
                         </Grid.Column>
 
                     </Grid.Row>
@@ -93,7 +104,7 @@ export default class Preview extends Component {
                     > Add to Recipes
                 </Button>
                 </Modal.Content> */}
-            </Modal>
+            </Modal >
         )
     }
 }

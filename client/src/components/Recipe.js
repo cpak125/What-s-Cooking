@@ -44,7 +44,7 @@ export default class Recipe extends Component {
 
         return (
             <Grid relaxed stackable>
-                <Grid.Row >
+                <Grid.Row textAlign='center' >
                     <Grid.Column width={2}>
                         <Link to='/recipes'>
                             <Icon size='big' link name='arrow left' />

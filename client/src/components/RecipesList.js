@@ -27,7 +27,7 @@ export default class RecipesList extends Component {
                 <AddRecipe addNewRecipe={this.props.addNewRecipe} />
 
                 <Grid columns={5} padded doubling>
-                    {recipes}
+                    {recipes.reverse()}
                 </Grid>
             </div>
         )
