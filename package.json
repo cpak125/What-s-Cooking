@@ -1,7 +1,7 @@
 {
     "name": "whats-cooking-cpak",
     "engines": {
-        "node": "9.9.0"
+        "node": "11.6.0"
     },
     "scripts": {
         "build": "cd client && npm install && npm run build && cd..",
@@ -11,8 +11,8 @@
     "dependencies": {
         "semantic-ui-react": "^0.85.0",
         "axios": "^0.18.0",
-        "react": "^16.6.1",
+        "react": "^16.7.0",
         "react-router-dom": "^4.3.1",
-        "styled-components": "^4.0.3"
+        "styled-components": "^4.1.3"
     }
 }
