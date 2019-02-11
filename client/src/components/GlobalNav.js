@@ -36,6 +36,7 @@ const GlobalNavHeader = styled.span`
 const SessionButtonWrapper = styled.div`
 display:flex;
 flex-wrap:wrap;
+color:white;
 `
 
 const SessionButton = styled.button`
