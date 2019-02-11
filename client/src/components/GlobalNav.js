@@ -73,23 +73,23 @@ export default class GlobalNav extends Component {
             <SessionButton onClick={this.signOut}> Sign Out</SessionButton>
 
         return (
-                <GlobalNavWrapper>
+            <GlobalNavWrapper>
 
-                    <GlobalNavLogoWrapper>
-                        <div>
-                            <GlobalNavLogo
-                                src="https://cdn4.vectorstock.com/i/1000x1000/76/33/the-crossed-knives-icon-knife-and-chef-kitchen-vector-6607633.jpg"
-                                alt="Knife Logo" />
-                            <GlobalNavHeader>What's Cooking</GlobalNavHeader>
-                        </div>
-                    </GlobalNavLogoWrapper>
+                <GlobalNavLogoWrapper>
+                    <div>
+                        <GlobalNavLogo
+                            src="../img/whats_cooking_logo.jpg"
+                            alt="Knife Logo" />
+                        <GlobalNavHeader>What's Cooking</GlobalNavHeader>
+                    </div>
+                </GlobalNavLogoWrapper>
 
-                    <SessionButtonWrapper>
-                        {email}
-                        {this.props.signedIn ? signOutButton : null}
-                    </SessionButtonWrapper>
+                <SessionButtonWrapper>
+                    {email}
+                    {this.props.signedIn ? signOutButton : null}
+                </SessionButtonWrapper>
 
-                </GlobalNavWrapper>
+            </GlobalNavWrapper>
         )
     }
 }
