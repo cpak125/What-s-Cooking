@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
-import './App.css'
 import axios from 'axios'
 import { setAxiosDefaults, userIsLoggedIn } from './util/SessionHeaderUtil'
 import SignUpLogIn from './components/SignUpLogIn';
