@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import axios from 'axios';
 import { Grid, Image, Button, Icon } from 'semantic-ui-react';
 
@@ -25,6 +25,7 @@ export default class Recipe extends Component {
     deleteRecipe = async () => {
         const recipeId = this.props.match.params.id
         await axios.delete(`/recipes/${recipeId}`)
+        this.setState({ redirect: true })
         window.location.reload()
     }
 
@@ -38,12 +39,16 @@ export default class Recipe extends Component {
 
         const ingredientsList = ingStrSplit.map((ingredient, i) => {
             return (
-                <div style={{padding: '0 0 15px 0'}} key={i}>{ingredient}</div>
+                <div style={{ padding: '0 0 15px 0' }} key={i}>{ingredient}</div>
             )
         })
 
+        if(this.state.redirect) {
+            return(<Redirect to={'/recipes'} />)
+        }
+
         return (
-            <Grid relaxed stackable>
+            <Grid relaxed stackable>z
                 <Grid.Row textAlign='center' >
                     <Grid.Column width={2}>
                         <Link to='/recipes'>
@@ -57,12 +62,12 @@ export default class Recipe extends Component {
 
                     <Grid.Column width={2}>
                         <Button color='red' size='small' icon onClick={() => this.deleteRecipe(recipe.id)}>
-                        <Icon name='trash alternate' size='large' />
+                            <Icon name='trash alternate' size='large' />
                         </Button>
                     </Grid.Column>
                 </Grid.Row>
 
-                <Grid.Row  divided centered>
+                <Grid.Row divided centered>
                     <Grid.Column width={6}>
                         <Image centered src={recipe.img} alt='recipe img' />
                     </Grid.Column>
@@ -78,7 +83,7 @@ export default class Recipe extends Component {
                     </Grid.Column>
                 </Grid.Row>
 
-                <Grid.Row  divided centered style={{ height: '70vh',padding:'0 0 20px 0' }}>
+                <Grid.Row divided centered style={{ height: '70vh', padding: '0 0 20px 0' }}>
                     <Grid.Column textAlign='left' stretched width={5}>
                         <h3>Ingredients:</h3>
                         {ingredientsList}
