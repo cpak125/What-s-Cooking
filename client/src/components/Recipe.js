@@ -5,8 +5,7 @@ import { Grid, Image, Button, Icon } from 'semantic-ui-react';
 
 export default class Recipe extends Component {
     state = {
-        recipe: {},
-        redirect: false
+        recipe: {}
     }
 
     componentDidMount = async () => {
@@ -26,7 +25,6 @@ export default class Recipe extends Component {
         const recipeId = this.props.match.params.id
         await axios.delete(`/recipes/${recipeId}`)
         window.location.replace('/')
-        // this.setState({ redirect: true })
     }
 
     render() {
@@ -42,10 +40,6 @@ export default class Recipe extends Component {
                 <div style={{ padding: '0 0 15px 0' }} key={i}>{ingredient}</div>
             )
         })
-
-        if(this.state.redirect) {
-            return(<Redirect to={'/recipes/'} />)
-        }
 
         return (
             <Grid relaxed stackable>z
