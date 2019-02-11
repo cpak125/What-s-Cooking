@@ -25,7 +25,7 @@ export default class Recipe extends Component {
     deleteRecipe = async () => {
         const recipeId = this.props.match.params.id
         await axios.delete(`/recipes/${recipeId}`)
-        window.location.href='/recipes'
+        window.location.replace('/recipes')
         // this.setState({ redirect: true })
     }
 
