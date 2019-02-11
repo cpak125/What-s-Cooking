@@ -40,10 +40,12 @@ export default class AddRecipe extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{ textAlign: 'center' }}>
+
                 <Input
                     type='text'
                     focus
+                    centered
                     style={{ width: '50vw' }}
                     placeholder='Search for a Recipe...'
                     value={this.state.searchQuery}
@@ -51,6 +53,7 @@ export default class AddRecipe extends Component {
                     onKeyPress={this.handleKeyPress} >
 
                 </Input>
+
 
                 <Modal
                     trigger={
