@@ -16,7 +16,6 @@ gem 'puma', '~> 3.11'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt'
 gem 'devise'
-gem 'omniauth'
 gem 'devise_token_auth'
 gem 'rb-readline', '~> 0.5.3'
 gem 'cancancan'
