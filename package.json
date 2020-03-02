@@ -1,7 +1,7 @@
 {
     "name": "whats-cooking-cpak",
     "engines": {
-        "node": ">=11.6.0"
+        "node": "11.6.0"
     },
     "scripts": {
         "build": "cd client && npm install && npm run build && cd ..",
