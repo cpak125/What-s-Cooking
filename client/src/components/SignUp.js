@@ -105,7 +105,7 @@ export default class SignUp extends Component {
                 <SignUpInput onChange={this.handleChange}
                   type="password"
                   name="password"
-                  placeholder="password"
+                  placeholder="password(min. 6 characters)"
                   value={this.state.password} />
               </div>
               <div>
