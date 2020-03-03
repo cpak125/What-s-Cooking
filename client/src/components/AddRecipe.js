@@ -45,7 +45,7 @@ export default class AddRecipe extends Component {
                 <Input
                     type='text'
                     focus
-                    centered
+                    centered='true'
                     style={{ width: '50vw' }}
                     placeholder='Search for a Recipe...'
                     value={this.state.searchQuery}
